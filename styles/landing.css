@@ -36,6 +36,27 @@ body.landing {
     position: relative;
     padding: 2rem;
     text-align: center;
+    opacity: 0;
+    -webkit-transform: scale(.3);
+    -moz-transform: scale(.3);
+    transform: scale(.3);
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    -webkit-transition-delay: .2s;
+    -moz-transition-delay: .2s;
+    transition-delay: .2s;
+}
+.point:nth-child(2) {
+    -webkit-transition-delay: .5s;
+    -moz-transition-delay: .5s;
+    transition-delay: .5s;
+}
+
+.point:last-child {
+    -webkit-transition-delay: 1.8s;
+    -moz-transition-delay: 1.8s;
+    transition-delay: 1.8s;
 }
 
 .point .point-title {
