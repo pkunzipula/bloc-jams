@@ -54,9 +54,9 @@ body.landing {
 }
 
 .point:last-child {
-    -webkit-transition-delay: 1.8s;
-    -moz-transition-delay: 1.8s;
-    transition-delay: 1.8s;
+    -webkit-transition-delay: .9s;
+    -moz-transition-delay: .9s;
+    transition-delay: .9s;
 }
 
 .point .point-title {
