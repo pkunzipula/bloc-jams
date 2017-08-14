@@ -37,11 +37,12 @@ var albumList = [
     year: '1985',
     albumArtUrl: 'assets/images/album_covers/03.png',
     songs: [
-        { title: 'I Don\t Know What This Is, But I\'m Going to Set My Drink On It', duration: '2:01' },
+        { title: 'I Don\'t Know What This Is, But I\'m Going to Set My Drink On It', duration: '2:01' },
         { title: 'Making Love Out of Common Household Items', duration: '5:01' },
         { title: 'I\'ll Never Be Your Pizza Burnin\'', duration: '3:21' },
         { title: 'Wookin\' Pa Nub', duration: '3:14' },
-        { title: 'Feel Like Making Flan', duration: '2:15' }
+        { title: 'Feel Like Making Flan', duration: '2:15' },
+        { title: 'Wookin\' Pa Nub', duration: '3:14' }
     ]
 }
 ];
@@ -81,27 +82,42 @@ var setCurrentAlbum = function(album) {
 
 };
 
+
+
+
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+
+var currentlyPlayingSong = null;
 
 window.onload = function() {
     setCurrentAlbum(albumList[0]);
 
     songListContainer.addEventListener('mouseover', function(event) {
         if(event.target.parentElement.className === 'album-view-song-item') {
-            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+            var songItem = getSongItem(event.target);
+            
+            if(songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
+                songItem.innerHTML = playButtonTemplate;
+            }
         }
     });
 
     for (var i = 0; i < songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function(event) {
-            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+          var songItem = getSongItem(event.target);
+          var songItemNumber = songItem.getAttribute('data-song-number');
+            if(songItemNumber !== currentlyPlayingSong) {
+                songItem.innerHTML = songItemNumber;
+            }        
+        });    
+        songRows[i].addEventListener('click', function(event) {
+            clickHandler(event.target);
         });
     }
-
-
 }
 
 var albumCover = document.getElementsByClassName('album-cover-art')[0];
