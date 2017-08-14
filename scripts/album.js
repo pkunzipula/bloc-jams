@@ -176,3 +176,5 @@ albumCover.addEventListener("click", function() {
         }
         setCurrentAlbum(albumList[n]);
 });
+
+
