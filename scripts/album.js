@@ -16,15 +16,31 @@ var setSong = function(songNumber) {
 /***** HERE IS THE PLAY/PAUSE FROM THE PLAYER BAR *******/
 
 var togglePlayFromPlayerBar = function() {
-    if (currentSoundFile.isPaused()) {
-        $(this).html(playerBarPauseButton);
-        currentlyPlayingCell.html(pauseButtonTemplate);
-        currentSoundFile.play()
-    } else {
-        $(this).html(playerBarPlayButton);
-        currentlyPlayingCell.html(playButtonTemplate);
-        currentSoundFile.pause();
+    var songNumber = parseInt($(this).attr('data-song-number'));
+
+   /* if(currentlyPlayingSongNumber !== null) {
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+        currentlyPlayingCell.html(currentlyPlayingSongNumber);
+    };*/
+
+    if(currentlyPlayingSongNumber !== songNumber) {
+        setSong(songNumber);
+        currentSoundFile.play();
+        $(this).html(pauseButtonTemplate);
+        currentSongFromAlbum = currentAlbum.songs[songNumber -1];
+        updatePlayerBarSong();
+    } else if(currentlyPlayingSongNumber === songNumber) {
+        if (currentSoundFile.isPaused()) {
+            $(this).html(playerBarPauseButton)
+            $currentlyPlayingCell.html(pauseButtonTemplate);
+            //currentSoundFile.play();
+        } else {
+            $(this).html(playerBarPlayButton);
+            $currentlyPlayingCell.html(playButtonTemplate);
+            //currentSoundFile.pause();
+        }
     }
+    currentSoundFile.togglePlay();
 };
 
 
