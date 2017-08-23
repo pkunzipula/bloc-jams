@@ -13,6 +13,8 @@ var setSong = function(songNumber) {
     setVolume(currentVolume);
 };
 
+/***** HERE IS THE PLAY/PAUSE FROM THE PLAYER BAR *******/
+
 var togglePlayFromPlayerBar = function() {
     if (currentSoundFile.isPaused()) {
         $(this).html(playerBarPauseButton);
@@ -23,7 +25,11 @@ var togglePlayFromPlayerBar = function() {
         currentlyPlayingCell.html(playButtonTemplate);
         currentSoundFile.pause();
     }
-}
+};
+
+
+
+
 
 var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
