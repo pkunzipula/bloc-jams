@@ -16,36 +16,18 @@ var setSong = function(songNumber) {
 /***** HERE IS THE PLAY/PAUSE FROM THE PLAYER BAR *******/
 
 var togglePlayFromPlayerBar = function() {
-    var songNumber = parseInt($(this).attr('data-song-number'));
+    var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
 
-   /* if(currentlyPlayingSongNumber !== null) {
-        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-        currentlyPlayingCell.html(currentlyPlayingSongNumber);
-    };*/
-
-    if(currentlyPlayingSongNumber !== songNumber) {
-        setSong(songNumber);
-        currentSoundFile.play();
-        $(this).html(pauseButtonTemplate);
-        currentSongFromAlbum = currentAlbum.songs[songNumber -1];
-        updatePlayerBarSong();
-    } else if(currentlyPlayingSongNumber === songNumber) {
-        if (currentSoundFile.isPaused()) {
-            $(this).html(playerBarPauseButton)
-            $currentlyPlayingCell.html(pauseButtonTemplate);
-            //currentSoundFile.play();
-        } else {
-            $(this).html(playerBarPlayButton);
-            $currentlyPlayingCell.html(playButtonTemplate);
-            //currentSoundFile.pause();
-        }
+    if ($(this).find("span").attr("class") == "ion-play") {
+        $(this).html(playerBarPauseButton);
+        currentlyPlayingCell.html(pauseButtonTemplate);
+        currentSoundFile.play();   
+    } else {
+        $(this).html(playerBarPlayButton);
+        currentlyPlayingCell.html(playButtonTemplate);
+        currentSoundFile.pause();
     }
-    currentSoundFile.togglePlay();
 };
-
-
-
-
 
 var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
@@ -138,8 +120,6 @@ var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
 
-
-
 var nextSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
         
@@ -204,7 +184,6 @@ var setVolume = function(volume) {
         currentSoundFile.setVolume(volume);
     }
 };
-
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
