@@ -30,9 +30,6 @@ var createSongRow = function(songNumber, songName, songLength) {
             currentSongFromAlbum = null;
         }
 
-
-
-
     };
 
     var onHover = function(event) {
@@ -169,10 +166,7 @@ var currentSongFromAlbum = null;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
-
 var currentlyPlayingSongNumber = null;
-
-
 
 $(function() {
     setCurrentAlbum(albumPicasso);
