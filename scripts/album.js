@@ -121,46 +121,25 @@ var trackIndex = function(album, song) {
 };
 
 var nextSong = function() {
-    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-        
+    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);  
     currentSongIndex++;
     
-    setSong(currentSongIndex + 1);
-    currentSoundFile.play();
+    var lastSongNumber;
     
-    if (currentSongIndex >= currentAlbum.songs.length) {
+    if (currentSongIndex == currentAlbum.songs.length) {
         currentSongIndex = 0;
+        lastSongNumber = currentAlbum.songs.length;
+    } else {
+        lastSongNumber = currentSongIndex;
     }
-
-    var lastSongNumber = currentlyPlayingSongNumber;
-
-    currentlyPlayingSongNumber = currentSongIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
-
-    updatePlayerBarSong();
-
-    var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
-
-    $previousSongNumberCell.html(pauseButtonTemplate);
-    $lastSongNumberCell.html(lastSongNumber);
-};
-    
-var prevSong = function() {
-    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-    
-    currentSongIndex--;
     
     setSong(currentSongIndex + 1);
     currentSoundFile.play();
-
-    if (currentSongIndex < 0) {
-        currentSongIndex = currentAlbum.songs.length - 1;
-    }
-
-    var lastSongNumber = currentlyPlayingSongNumber;
-
+    
+    console.log(lastSongNumber);
+    
     currentlyPlayingSongNumber = currentSongIndex + 1;
+    
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
     updatePlayerBarSong();
@@ -169,6 +148,39 @@ var prevSong = function() {
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
 
     $nextSongNumberCell.html(pauseButtonTemplate);
+    $lastSongNumberCell.html(lastSongNumber);
+};
+    
+var prevSong = function() {
+    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+    currentSongIndex--;
+    
+    var lastSongNumber;
+    
+    if (currentSongIndex < 0) {
+        currentSongIndex = currentAlbum.songs.length - 1;
+        lastSongNumber = 1;
+    } else {
+        lastSongNumber = currentSongIndex + 2;
+    }
+    
+    setSong(currentSongIndex + 1);
+    currentSoundFile.play();
+
+    currentlyPlayingSongNumber = currentSongIndex + 1;
+    
+        
+    console.log(lastSongNumber);
+    console.log(currentlyPlayingSongNumber);
+    
+    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+
+    updatePlayerBarSong();
+
+    var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+
+    $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
 };
 
