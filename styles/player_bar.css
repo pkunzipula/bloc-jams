@@ -119,16 +119,17 @@
     margin-top: -.25rem;
     border-radius: 50%;
     cursor: pointer;
-    -webkit-transition: all 100ms ease-in-out;
-       -moz-transition: all 100ms ease-in-out;
-            transition: all 100ms ease-in-out;
+    transition: width 100ms ease-in-out;
+    transition: height 100ms ease-in-out;
+    transition: margin-top 100ms ease-in-out;
+    transition: margin-left 100ms ease-in-out;
 }
 
 .seek-bar:hover .thumb {
-    width: 1.1rem;
-    height: 1.1rem;
-    margin-top: -.55rem;
-    margin-left: -.55rem;
+    width: 1rem;
+    height: 1rem;
+    margin-top: -.5rem;
+    margin-left: -.5rem;
 }
 
 .player-bar .volume {
